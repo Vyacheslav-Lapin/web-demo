@@ -47,6 +47,9 @@
     <wildfly-maven-plugin.version>2.1.0.Beta1</wildfly-maven-plugin.version>
 
     <properties-maven-plugin.version>1.0.0</properties-maven-plugin.version>
+
+    <minimal.maven.version>3.6.1</minimal.maven.version>
+    <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     <!--endregion-->
 
   </properties>
@@ -177,6 +180,25 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>${minimal.maven.version}</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -188,6 +210,9 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>properties-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
       </plugin>
     </plugins>
 
